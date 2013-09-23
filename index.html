@@ -2,21 +2,40 @@
 <html>
 <head>
 <script type="text/javascript">
-var count = 0;
-var mouseX;
-var mouseY;
+var frame = 0;
+var mouseX = 0;
+var mouseY = 0;
 
 var brightness = 0;
 
 var flashTime = 0;
 
+var enemies = [];
+
 window.setInterval(drawScreen, 32);
 
 function handleMouseMove(event) {
-	count++;
+	mouseX=event.clientX-10;
+	mouseY=event.clientY-10;
+}
 
-	mouseX=event.clientX;
-	mouseY=event.clientY;
+function handleMouseClick() {
+	flashTime=10;
+	var gunsound = document.getElementById("gunshot");
+	gunsound.currentTime=0;
+	gunsound.play();
+}
+
+function gameLogic() {
+	frame++;
+
+	if (frame % 120 == 0) {
+
+	}
+}
+
+function randomEnemy() {
+	this.x = Math.round(Math.random() * 1000);
 }
 
 function drawScreen() {
@@ -29,13 +48,22 @@ function drawScreen() {
 
 	context.strokeStyle="#FFFFFF";
 	context.beginPath();
-	context.arc(mouseX-10, mouseY-10, 20, 0, 2*Math.PI);
+	context.arc(mouseX, mouseY, 20, 0, 2*Math.PI);
+	context.stroke();
+
+	context.moveTo(mouseX - 7, mouseY);
+	context.lineTo(mouseX + 7, mouseY);
+	context.stroke();
+
+	context.moveTo(mouseX, mouseY - 7);
+	context.lineTo(mouseX, mouseY + 7);
 	context.stroke();
 
 	if (flashTime > 0) {
 		flashTime--;
 	}
 }
+
 
 </script>
 <style>
@@ -44,8 +72,9 @@ function drawScreen() {
 	margin-right: auto;
 }
 </style>
+<audio id="gunshot" src="./gunshot.mp3" preload="auto"></audio>
 </head>
 <body>
-	<canvas width="1000px" height="500px" id="mCanvas" onload="handleMouseMove(event);" onmousemove="handleMouseMove(event);" onmousedown="flashTime=10"></canvas><br>
+	<canvas width="1000px" height="500px" id="mCanvas" onload="handleMouseMove(event);" onmousemove="handleMouseMove(event);" onmousedown="handleMouseClick();"></canvas><br>
 	<textarea id="mTextArea" ></textarea>
 </body>
