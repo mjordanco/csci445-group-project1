@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+var count = 0;
+var mouseX;
+var mouseY;
+
+function handleMouseMove(event) {
+	count++;
+	var textarea = document.getElementById("mTextArea");
+	textarea.value = count;
+
+	mouseX=event.clientX;
+	mouseY=event.clientY;
+
+	var canvas=document.getElementById("mCanvas");
+	var context=canvas.getContext("2d");
+
+	context.fillStyle="#0000FF";
+	context.fillRect(0,0,1000,500);
+	context.beginPath();
+	context.arc(mouseX-10, mouseY-10, 20, 0, 2*Math.PI);
+	context.stroke();
+}
+</script>
+<style>
+#mCanvas {
+	margin-left: auto;
+	margin-right: auto;
+}
+</style>
+</head>
+<body>
+	<canvas width="1000px" height="500px" id="mCanvas" onmousemove="handleMouseMove(event);"></canvas><br>
+	<textarea id="mTextArea" ></textarea>
+</body>
