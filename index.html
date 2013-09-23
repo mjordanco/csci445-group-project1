@@ -6,23 +6,37 @@ var count = 0;
 var mouseX;
 var mouseY;
 
+var brightness = 0;
+
+var flashTime = 0;
+
+window.setInterval(drawScreen, 32);
+
 function handleMouseMove(event) {
 	count++;
-	var textarea = document.getElementById("mTextArea");
-	textarea.value = count;
 
 	mouseX=event.clientX;
 	mouseY=event.clientY;
+}
 
+function drawScreen() {
 	var canvas=document.getElementById("mCanvas");
 	var context=canvas.getContext("2d");
 
-	context.fillStyle="#0000FF";
+	brightness = Math.round(flashTime / 10 * 255);
+	context.fillStyle="rgb("+brightness+","+brightness+","+brightness+")";
 	context.fillRect(0,0,1000,500);
+
+	context.strokeStyle="#FFFFFF";
 	context.beginPath();
 	context.arc(mouseX-10, mouseY-10, 20, 0, 2*Math.PI);
 	context.stroke();
+
+	if (flashTime > 0) {
+		flashTime--;
+	}
 }
+
 </script>
 <style>
 #mCanvas {
@@ -32,6 +46,6 @@ function handleMouseMove(event) {
 </style>
 </head>
 <body>
-	<canvas width="1000px" height="500px" id="mCanvas" onmousemove="handleMouseMove(event);"></canvas><br>
+	<canvas width="1000px" height="500px" id="mCanvas" onload="handleMouseMove(event);" onmousemove="handleMouseMove(event);" onmousedown="flashTime=10"></canvas><br>
 	<textarea id="mTextArea" ></textarea>
 </body>
