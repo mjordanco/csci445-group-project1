@@ -2,6 +2,7 @@
 <html>
 <head>
 <script type="text/javascript">
+var canvas = document.getElementById("mCanvas");
 var frame = 0;
 var mouseX = 0;
 var mouseY = 0;
@@ -14,11 +15,15 @@ var points = 0;
 
 var enemy = new Enemy();
 var radiusChange = 0;
+var minRadius = 20;
+var maxRadius = 100;
 var xChange = 0;
 var yChange = 0;
 
 window.setInterval(drawScreen, 32);
 window.setInterval(gameLogic, 32);
+
+document.getElementById("music").play();
 
 function handleMouseMove(event) {
 	mouseX=event.clientX-10;
@@ -40,6 +45,8 @@ function handleMouseClick() {
 	if (dist < enemy.radius) {
 		points++;
 		enemy = new Enemy();
+		minRadius = enemy.radius * .75;
+		maxRadius = enemy.radius * 1.25;
 		var rand = Math.random();
 		if (rand > .8) {
 			rand = Math.random();
@@ -62,7 +69,7 @@ function handleMouseClick() {
 function gameLogic() {
 	frame++;
 
-	if (enemy.radius + radiusChange > 20 && enemy.radius + radiusChange < 100) {
+	if (enemy.radius + radiusChange > minRadius && enemy.radius + radiusChange < maxRadius) {
 		enemy.radius += radiusChange;
 	} else {
 		radiusChange = -radiusChange;
@@ -149,6 +156,7 @@ canvas {
 }
 </style>
 <audio id="gunshot" src="./gunshot.mp3" preload="auto"></audio>
+<audio id="music" src="http://www.dwerden.com/SoundFiles/Military/MarineBand/Barnum_and_Baileys_Favorite.mp3" preload="auto" loop="true" oncanplay="play();"></audio>
 </head>
 <body>
 	<canvas width="1000px" height="500px" id="mCanvas" onload="handleMouseMove(event);" onmousemove="handleMouseMove(event);" onmousedown="handleMouseClick();"></canvas><br>
