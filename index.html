@@ -25,13 +25,14 @@ var yChange = 0;
 window.setInterval(drawScreen, 32);
 window.setInterval(gameLogic, 32);
 
-document.getElementById("music").play();
-
 function handleMouseMove(event) {
 	canvas = document.getElementById("mCanvas");
 
-	mouseX=event.clientX-10-canvas.offsetLeft;
-	mouseY=event.clientY-10-canvas.offsetTop;
+	var top = window.pageYOffset || document.documentElement.scrollTop
+	var left = window.pageXOffset || document.documentElement.scrollLeft
+
+	mouseX=event.clientX-10-canvas.offsetLeft+left;
+	mouseY=event.clientY-10-canvas.offsetTop+top;
 }
 
 function handleMouseClick() {
@@ -155,8 +156,8 @@ function drawScreen() {
 
 </script>
 
-<audio id="gunshot" src="./gunshot.mp3" preload="auto"></audio>
-<audio id="music" src="http://www.dwerden.com/SoundFiles/Military/MarineBand/Barnum_and_Baileys_Favorite.mp3" preload="auto" loop="true" oncanplay="play();"></audio>
+<!-- <audio id="gunshot" src="./gunshot.mp3" preload="auto"></audio> -->
+<!-- <audio id="music" src="http://www.dwerden.com/SoundFiles/Military/MarineBand/Barnum_and_Baileys_Favorite.mp3" preload="auto" loop="true" oncanplay="play();"></audio> -->
 </head>
 <body>
 	<header>
