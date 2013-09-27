@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<title> That Bull Eyes! </title>
+<link rel="stylesheet" type="text/css" href="bullEyes.css" />
 <script type="text/javascript">
 var canvas = document.getElementById("mCanvas");
 var frame = 0;
@@ -150,15 +152,20 @@ function drawScreen() {
 
 
 </script>
-<style>
-canvas {
-	cursor: none;
-}
-</style>
+
 <audio id="gunshot" src="./gunshot.mp3" preload="auto"></audio>
 <audio id="music" src="http://www.dwerden.com/SoundFiles/Military/MarineBand/Barnum_and_Baileys_Favorite.mp3" preload="auto" loop="true" oncanplay="play();"></audio>
 </head>
 <body>
-	<canvas width="1000px" height="500px" id="mCanvas" onload="handleMouseMove(event);" onmousemove="handleMouseMove(event);" onmousedown="handleMouseClick();"></canvas><br>
-	<textarea id="mTextArea" ></textarea>
+	<header>
+	<h1>That Bulls Eyes! </h1>
+	</header>
+	<nav> 
+		 <a href="index.html">Home</a>
+		<a href="howto.html">How to? </a>
+	</nav>
+	<div id="rightC">
+		<canvas width="1000px" height="500px" id="mCanvas" onload="handleMouseMove(event);" onmousemove="handleMouseMove(event);" onmousedown="handleMouseClick();"></canvas><br>
+		<textarea id="mTextArea" ></textarea>
+	</div>
 </body>

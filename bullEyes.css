@@ -1,0 +1,43 @@
+body {
+		background-color: 	#326497;
+}
+
+nav a {  background-color: #779977;
+	 color: #333399;
+	 border-color: #333333;
+	 border: 1px;
+	 font-weight: bold;
+	 margin: 5px 1px;
+	 padding: 2px;
+	 text-decoration: none;
+	 border-style: solid;
+}
+nav a:hover {
+		background-color: #447799;
+}
+h1 {
+	background-color: #999999;
+	margin: auto;
+	width: 1000px;
+	padding-left: 200px;
+	border-radius: 15px;
+	box-shadow: 5px 5px 5px #828282;
+}
+nav {
+		padding-left: 290px;
+	margin-top: 10px;
+		
+}
+canvas {
+	cursor: none;
+	margin: auto;
+	margin-top: 20px;
+    display: block;
+}
+#mTextArea {   margin: auto;
+    display: block;
+	padding-top: 10px;
+	border-radius: 15px;
+	text-align: center;
+}
+
