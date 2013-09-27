@@ -28,8 +28,10 @@ window.setInterval(gameLogic, 32);
 document.getElementById("music").play();
 
 function handleMouseMove(event) {
-	mouseX=event.clientX-10;
-	mouseY=event.clientY-10;
+	canvas = document.getElementById("mCanvas");
+
+	mouseX=event.clientX-10-canvas.offsetLeft;
+	mouseY=event.clientY-10-canvas.offsetTop;
 }
 
 function handleMouseClick() {
