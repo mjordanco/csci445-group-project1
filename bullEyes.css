@@ -15,10 +15,14 @@ nav a {  background-color: #779977;
 nav a:hover {
 		background-color: #447799;
 }
-h1 {
+header {
+	background-image: url(thumbnail.png);
+		background-repeat: no-repeat;
+		background-position: right;
 	background-color: #999999;
 	margin: auto;
 	width: 1000px;
+	height: 60px;
 	padding-left: 200px;
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px #828282;
@@ -40,4 +44,15 @@ canvas {
 	border-radius: 15px;
 	text-align: center;
 }
-
+footer {	background-color: #333333;
+		padding-left: 100px;
+		margin-left: 125px;
+		margin-top: 50px;
+		height: 25px;
+		width: 550px;
+		background-image: url(thumbnail.png);
+		background-repeat: no-repeat;
+		background-position: left;
+		border-radius: 15px;
+	box-shadow: 5px 5px 5px #555555;
+}
