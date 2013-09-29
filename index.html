@@ -1,11 +1,12 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-<title> That Bull Eyes! </title>
+<title> Bullseye! </title>
 <link rel="stylesheet" type="text/css" href="bullEyes.css" />
 <link rel="icon" href="thumbnail.png" type="image/x-icon">
 <script type="text/javascript">
-var canvas = document.getElementById("mCanvas");
+var canvas = document.getElementById("myCanvas");
+//Initialize global game variables
 var frame = 0;
 var mouseX = 0;
 var mouseY = 0;
@@ -15,6 +16,9 @@ var brightness = 0;
 var flashTime = 0;
 
 var points = 0;
+var hit_last_target = true;
+var hit_in_a_row = 0;
+var miss_in_a_row = 0;
 
 var enemy = new Enemy();
 var radiusChange = 0;
@@ -27,7 +31,7 @@ window.setInterval(drawScreen, 32);
 window.setInterval(gameLogic, 32);
 
 function handleMouseMove(event) {
-	canvas = document.getElementById("mCanvas");
+	canvas = document.getElementById("myCanvas");
 
 	var top = window.pageYOffset || document.documentElement.scrollTop
 	var left = window.pageXOffset || document.documentElement.scrollLeft
@@ -42,52 +46,82 @@ function handleMouseClick() {
 	gunsound.currentTime=0;
 	gunsound.play();
 
+	//Determine mouse click location in relation to target location
 	var xDif = enemy.xPosition - mouseX;
 	var yDif = enemy.yPosition - mouseY;
-
 	var dist = Math.sqrt(xDif * xDif + yDif * yDif);
-
-	document.getElementById("mTextArea").value = dist;
+	document.getElementById("myTextArea").value = dist;
+	
+	//If the mouse click is within the radius of the target
 	if (dist < enemy.radius) {
-		points++;
+		points++; 
+		hit_in_a_row++;
+		miss_in_a_row = 0;
+		hit_last_target = true;
+		
+		//Generate a new target with random radius and location
 		enemy = new Enemy();
-		minRadius = enemy.radius * .75;
+		minRadius = enemy.radius * .95;
 		maxRadius = enemy.radius * 1.25;
+		
+		//Makes size of radius of a target oscillate back and forth to give 'pulsing' effect
 		var rand = Math.random();
-		if (rand > .8) {
-			rand = Math.random();
-			if (rand > .5) {
-				radiusChange = 1;
-			} else {
-				radiusChange = -1;
-			}
-			
-			xChange = Math.round(Math.random() * 10) - 5;
-			yChange = Math.round(Math.random() * 10) - 5;
+		if (rand > .5) {
+			radiusChange = 1;
 		} else {
-			radiusChange = 0;
-			xChange = 0;
-			yChange = 0;
+			radiusChange = -1;
+		}
+		
+		
+		//Causes the target to move around the screen
+		//The smaller the change, the faster the target moves
+		if (points <= 10) {
+			xChange = Math.round(Math.random() * 10);
+			yChange = Math.round(Math.random() * 10);
+		} else if (points > 10 && points <= 20) { 
+			xChange = Math.round(Math.random() * 10) + 3;
+			yChange = Math.round(Math.random() * 10) + 3;
+		} else if (points > 20 && points <= 30) { 
+			xChange = Math.round(Math.random() * 10) + 5;
+			yChange = Math.round(Math.random() * 10) + 5;
+		} else if (points > 30 && points <= 40) { 
+			xChange = Math.round(Math.random() * 10) + 7;
+			yChange = Math.round(Math.random() * 10) + 7;
+		}
+	} else { //Else if the player misses the target
+		hit_in_a_row = 0;
+		miss_in_a_row++;
+		hit_last_target = false;
+		if (points >= 1) { //Don't allow score to go negative
+			points--;
 		}
 	} 
 }
 
+//Create a target object with a random x location, y location, and radius
+function Enemy() {
+	this.xPosition = Math.round(Math.random() * 1000);
+	this.yPosition = Math.round(Math.random() * 500);
+	this.radius = Math.round(Math.random() * 30) + 20;
+}
+
 function gameLogic() {
+	//Called repeatedly over and over as soon as game starts and continues
 	frame++;
 
-	if (enemy.radius + radiusChange > minRadius && enemy.radius + radiusChange < maxRadius) {
+	if ((enemy.radius + radiusChange > minRadius) && (enemy.radius + radiusChange < maxRadius)) {
 		enemy.radius += radiusChange;
 	} else {
 		radiusChange = -radiusChange;
 	}
 
-	if (enemy.xPosition + xChange < 1000 && enemy.xPosition + xChange > 0) {
+	if ((enemy.xPosition + xChange < 1000 - enemy.radius) && (enemy.xPosition + xChange > 0 + enemy.radius)) {
 		enemy.xPosition += xChange;
 	} else {
 		xChange = -xChange;
 	}
 
-	if (enemy.yPosition + yChange < 500 && enemy.yPosition + yChange > 0) {
+	if ((enemy.yPosition + yChange < 500 - enemy.radius) && (enemy.yPosition + yChange > 0 + enemy.radius)) {
 		enemy.yPosition += yChange;
 	} else {
 		yChange = -yChange;
@@ -98,23 +132,19 @@ function gameLogic() {
 	// }
 }
 
-function Enemy() {
-	this.xPosition = Math.round(Math.random() * 1000);
-	this.yPosition = Math.round(Math.random() * 500);
-	this.radius = Math.round(Math.random() * 30) + 20;
-}
-
 function drawScreen() {
-	var canvas=document.getElementById("mCanvas");
+	var canvas=document.getElementById("myCanvas");
 	var context=canvas.getContext("2d");
 
+	//Draw black playing area
 	context.fillStyle="#000000";
 	context.fillRect(0,0,1000,500);
 
+	//Display 'flash' effect for background on mouse click
 	brightness = Math.round(flashTime / 10 * 255);
-	context.fillStyle="rgb("+brightness+","+brightness+","+brightness+")";
+	context.fillStyle="rgb("+brightness+", "+brightness+", "+brightness+")";
 	context.fillRect(0,0,1000,500);
-
+	 
 	context.strokeStyle="#FF0000";
 	context.lineWidth=enemy.radius / 5;
 	context.fillStyle="#FFFFFF";
@@ -132,28 +162,67 @@ function drawScreen() {
 	context.stroke();
 	context.lineWidth=1;
 
+	//Draw white circle for mouse pointer
 	context.strokeStyle="#FFFFFF";
 	context.beginPath();
 	context.arc(mouseX, mouseY, 20, 0, 2*Math.PI);
 	context.stroke();
 
-	context.fillStyle="#00FF00";
-	context.font = "bold 24px sans-serif";
-	context.fillText("Score : " + points, 10, 24);
-
+	//Draw white plus sign in circle for mouse pointer
 	context.moveTo(mouseX - 7, mouseY);
 	context.lineTo(mouseX + 7, mouseY);
 	context.stroke();
-
 	context.moveTo(mouseX, mouseY - 7);
 	context.lineTo(mouseX, mouseY + 7);
 	context.stroke();
 
+	//Display score in green text in upper left corner of screen
+	context.fillStyle="#00FF00";
+	context.font = "bold 24px sans-serif";
+	context.fillText("Score : " + points, 10, 24);
+	
+	//Display number of targets hit in a row in green text in upper right corner of screen
+	context.fillStyle="#00FF00";
+	context.font = "bold 24px sans-serif";
+	context.fillText("In a row : " + hit_in_a_row, 850, 24);
+
+	if (miss_in_a_row == 0) {
+		setAllCircles(context, 'black', 'black', 'black', 'black', 'black');
+	} else if (miss_in_a_row == 1) {
+		setAllCircles(context, 'red', 'black', 'black', 'black', 'black');
+	} else if (miss_in_a_row == 2) {
+	circle(context, 970, 60, "red");
+		setAllCircles(context, 'red', 'red', 'black', 'black', 'black');
+	} else if (miss_in_a_row == 3) {
+		setAllCircles(context, 'red', 'red', 'red', 'black', 'black');
+	} else if (miss_in_a_row == 4) {
+		setAllCircles(context, 'red', 'red', 'red', 'red', 'black');
+	} else if (miss_in_a_row >= 5) {
+		setAllCircles(context, 'red', 'red', 'red', 'red', 'red');
+		//------------- GAME OVER-----------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+
+	//Counts down for short time to have white background to create 'flash' effect
 	if (flashTime > 0) {
 		flashTime--;
 	}
 }
 
+function circle(context, xRight, yDown, color) {
+	context.beginPath();
+	context.arc(xRight, yDown, 10, 0, 2*Math.PI, true); 
+	context.closePath();
+	context.fillStyle = color;
+	context.fill();
+}
+
+function setAllCircles(context, color1, color2, color3, color4, color5) {
+	circle(context, 970, 60, color1);
+	circle(context, 970, 100, color2);
+	circle(context, 970, 140, color3);
+	circle(context, 970, 180, color4);
+	circle(context, 970, 220, color5);
+} 
 
 </script>
 
@@ -162,15 +231,16 @@ function drawScreen() {
 </head>
 <body>
 	<header>
-	<h1>That Bulls Eyes! </h1>
+	<h1>Bullseye! </h1>
 	</header>
 	<nav> 
-		 <a href="index.html">Home</a>
-		<a href="howto.html">How to? </a>
+		<a href="index.html">Home</a>
+		<a href="howto.html">How To</a>
+		<a href="scores.html">High Scores</a>
 	</nav>
 	<div id="rightC">
-		<canvas width="1000px" height="500px" id="mCanvas" onload="handleMouseMove(event);" onmousemove="handleMouseMove(event);" onmousedown="handleMouseClick();"></canvas><br>
-		<textarea id="mTextArea" ></textarea>
+		<canvas width="1000px" height="500px" id="myCanvas" onload="handleMouseMove(event);" onmousemove="handleMouseMove(event);" onmousedown="handleMouseClick();"></canvas><br>
+		<textarea id="myTextArea" ></textarea>
 	</div>
 	<footer>
 		&copy; 2013 The Bull Team. Some rights reserved. (mostly not) 
