@@ -14,18 +14,16 @@ nav a {
 nav a:hover {
 	background-color: #447799;
 }
-<<<<<<< HEAD
 #resetBtn {
 	background-color: #B20000;
 	border: 3px solid black;
 	color: white;
 	padding: 10px 30px 10px 30px;
 	margin-left: 165px;
-=======
+}
 h1 {
 	padding-left: 200px;
 	width: 900px;
->>>>>>> b9c479b59a395b264b7691cc0c17d937dce3279c
 }
 header {
 	background-image: url(thumbnail.png);
