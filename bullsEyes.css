@@ -14,12 +14,18 @@ nav a {
 nav a:hover {
 	background-color: #447799;
 }
+<<<<<<< HEAD
 #resetBtn {
 	background-color: #B20000;
 	border: 3px solid black;
 	color: white;
 	padding: 10px 30px 10px 30px;
 	margin-left: 165px;
+=======
+h1 {
+	padding-left: 200px;
+	width: 900px;
+>>>>>>> b9c479b59a395b264b7691cc0c17d937dce3279c
 }
 header {
 	background-image: url(thumbnail.png);
@@ -28,9 +34,8 @@ header {
 	background-color: #999999;
 	line-height: 20px;
 	margin: auto;
-	width: 900px;
+	
 	height: 60px;
-	padding-left: 200px;
 	margin-bottom: 20px;
 	border: 3px solid black;
 	border-radius: 15px;
@@ -38,7 +43,7 @@ header {
 }
 nav {
 	padding-left: 150px;
-	margin-top: 10px;
+	margin-top: 30px;
 }
 canvas {
 	cursor: none;
@@ -65,4 +70,48 @@ footer {
 	background-position: left;
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px #555555;
+	-moz-transition:-moz-transform 1s;
 }
+footer:hover {
+	-moz-transform: scale(1.15, 1.15);
+}
+div.wave{
+     position: relative;
+     width: 100%;}
+div.wave > span{
+     float: left;
+     width: 10%;
+     height: 5px;
+     animation: animate 2.0s ease-in-out alternate infinite;}
+div.wave > span:nth-child(1){
+     background-color: #268BD2;}
+div.wave > span:nth-child(2){
+     background-color: #268BD2;
+     animation-delay: .1s;}
+div.wave > span:nth-child(3){
+     background-color: #268BD2;
+     animation-delay: .2s;}
+div.wave > span:nth-child(4){
+     background-color: #268BD2;
+     animation-delay: .3s;}
+div.wave > span:nth-child(5){
+     background-color: #268BD2;
+     animation-delay: .4s;}
+div.wave > span:nth-child(6){
+     background-color: #268BD2;
+     animation-delay: .5s;}
+div.wave > span:nth-child(7){
+     background-color: #268BD2;
+     animation-delay: .6s;}
+div.wave > span:nth-child(8){
+     background-color: #268BD2;
+     animation-delay: .7s;}
+div.wave > span:nth-child(9){
+     background-color: #268BD2;
+     animation-delay: .8s;}
+div.wave > span:nth-child(10){
+     background-color: #268BD2;
+     animation-delay: .9s;}
+@keyframes animate{
+     to { height: 15px; }}
+

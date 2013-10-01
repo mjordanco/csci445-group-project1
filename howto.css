@@ -1,10 +1,127 @@
-body {   background-color: 	#326497;
+body {
+	background-color: 	#326497;
+}
+nav a {  
+	background-color: #779977;
+	border: 1px solid black;
+	border-radius: 5px;
+	font-weight: bold;
+	color: #333399;
+	margin: 10px 1px;
+	padding: 10px 40px 10px 40px;
+	text-decoration: none;
+}
+nav a:hover {
+	background-color: #447799;
 }
 h1 {
-background-color: #999999;
-	margin: auto;
-	width: 1000px;
 	padding-left: 200px;
+	width: 900px;
+}
+header {
+	background-image: url(thumbnail.png);
+	background-repeat: no-repeat;
+	background-position: right;
+	background-color: #999999;
+	line-height: 20px;
+	margin: auto;
+	
+	height: 60px;
+	margin-bottom: 20px;
+	border: 3px solid black;
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px #828282;
+	
+}
+nav {
+	padding-left: 150px;
+	margin-top: 30px;
+	-moz-transition:-moz-transform 1s;
+}
+footer {	
+	background-color: #333333;
+	padding-left: 100px;
+	margin-left: 125px;
+	margin-top: 50px;
+	height: 25px;
+	width: 550px;
+	background-image: url(thumbnail.png);
+	background-repeat: no-repeat;
+	background-position: left;
+	border-radius: 15px;
+	box-shadow: 5px 5px 5px #555555;
+	-moz-transition:-moz-transform 1s;
+	-webkit-transition: -webkit-transform 1s;
+}
+footer:hover {
+	-moz-transform: scale(1.15, 1.15);
+	-webkit-transition: scale(1.15, 1.15);
+}
+
+div.wave{
+     position: relative;
+     width: 100%;}
+div.wave > span{
+     float: left;
+     width: 10%;
+     height: 5px;
+     animation: animate 2.0s ease-in-out alternate infinite;}
+div.wave > span:nth-child(1){
+     background-color: #268BD2;}
+div.wave > span:nth-child(2){
+     background-color: #268BD2;
+     animation-delay: .1s;}
+div.wave > span:nth-child(3){
+     background-color: #268BD2;
+     animation-delay: .2s;}
+div.wave > span:nth-child(4){
+     background-color: #268BD2;
+     animation-delay: .3s;}
+div.wave > span:nth-child(5){
+     background-color: #268BD2;
+     animation-delay: .4s;}
+div.wave > span:nth-child(6){
+     background-color: #268BD2;
+     animation-delay: .5s;}
+div.wave > span:nth-child(7){
+     background-color: #268BD2;
+     animation-delay: .6s;}
+div.wave > span:nth-child(8){
+     background-color: #268BD2;
+     animation-delay: .7s;}
+div.wave > span:nth-child(9){
+     background-color: #268BD2;
+     animation-delay: .8s;}
+div.wave > span:nth-child(10){
+     background-color: #268BD2;
+     animation-delay: .9s;}
+@keyframes animate{
+     to { height: 15px; }}
+#list{
+	background-color: #EDEDFE;
+	margin: auto;
+	width: 1050px;
+}
+dt {
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 10px;
+	 
+   }
+.first {
+	opacity: 1;
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+.first:hover {
+	opacity:0.7;
+}
+dd {
+	-webkit-transition: background-color 1s linear;
+     -moz-transition: background-color 1s linear;
+     transition: background-color 1s linear;
+}
+dd:hover {
+	background-color: #BBBBBB;
 }
