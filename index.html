@@ -19,6 +19,8 @@ var points = 0;
 var hit_last_target = true;
 var hit_in_a_row = 0;
 var miss_in_a_row = 0;
+
+var playGame = true;
 var lives = 3;
 
 var gameIntervalID = -1;
@@ -44,78 +46,80 @@ function handleMouseMove(event) {
 }
 
 function handleMouseClick() {
-	flashTime=10;
-	var gunsound = document.getElementById("gunshot");
-	gunsound.currentTime=0;
-	gunsound.play();
+	if (playGame == true) {
+		flashTime=10;
+		var gunsound = document.getElementById("gunshot");
+		gunsound.currentTime=0;
+		gunsound.play();
 
-	//Determine mouse click location in relation to target location
-	var xDif = enemy.xPosition - mouseX;
-	var yDif = enemy.yPosition - mouseY;
-	var dist = Math.sqrt(xDif * xDif + yDif * yDif);
-	document.getElementById("myTextArea").value = dist;
+		//Determine mouse click location in relation to target location
+		var xDif = enemy.xPosition - mouseX;
+		var yDif = enemy.yPosition - mouseY;
+		var dist = Math.sqrt(xDif * xDif + yDif * yDif);
+		document.getElementById("myTextArea").value = dist;
 	
-	//If the mouse click is within the radius of the target
-	if (dist < enemy.radius) {
-		points++; 
-		hit_in_a_row++;
-		miss_in_a_row = 0;
-		hit_last_target = true;
+		//If the mouse click is within the radius of the target
+		if (dist < enemy.radius) {
+			points++; 
+			hit_in_a_row++;
+			miss_in_a_row = 0;
+			hit_last_target = true;
 		
-		//Generate a new target with random radius and location
-		enemy = new Enemy();
-		minRadius = enemy.radius;
-		maxRadius = enemy.radius * 1.25;
+			//Generate a new target with random radius and location
+			enemy = new Enemy();
+			minRadius = enemy.radius;
+			maxRadius = enemy.radius * 1.25;
 		
-		//Makes size of radius of a target oscillate back and forth to give 'pulsing' effect
-		var rand = Math.random();
-		if (rand > .5) {
-			radiusChange = 1;
-		} else {
-			radiusChange = -1;
-		}
+			//Makes size of radius of a target oscillate back and forth to give 'pulsing' effect
+			var rand = Math.random();
+			if (rand > .5) {
+				radiusChange = 1;
+			} else {
+				radiusChange = -1;
+			}
 		
-		//Causes the target to move around the screen
-		//The larger the change, the faster the target moves
-		if (points <= 10) {
-			xChange = Math.round(Math.random() * 10);
-			yChange = Math.round(Math.random() * 10);
-		} else if (points > 10 && points <= 20) { 
-			xChange = Math.round(Math.random() * 10) + 5;
-			yChange = Math.round(Math.random() * 10) + 5;
-		} else if (points > 20 && points <= 30) { 
-			xChange = Math.round(Math.random() * 10) + 7;
-			yChange = Math.round(Math.random() * 10) + 7;
-		} else if (points > 30 && points <= 40) { 
-			xChange = Math.round(Math.random() * 10) + 9;
-			yChange = Math.round(Math.random() * 10) + 9;
-		} else if (points > 40 && points <= 50) {
-			xChange = Math.round(Math.random() * 10) + 10;
-			yChange = Math.round(Math.random() * 10) + 10;
-		} else if (points > 50 && points <= 60) { 
-			xChange = Math.round(Math.random() * 10) + 11;
-			yChange = Math.round(Math.random() * 10) + 11;
-		} else if (points > 60 && points <= 70) { 
-			xChange = Math.round(Math.random() * 10) + 12;
-			yChange = Math.round(Math.random() * 10) + 12;
-		} else if (points > 70 && points <= 80) {
-			xChange = Math.round(Math.random() * 10) + 13;
-			yChange = Math.round(Math.random() * 10) + 13;
-		} else if (points > 80 && points <= 90) {
-			xChange = Math.round(Math.random() * 10) + 14;
-			yChange = Math.round(Math.random() * 10) + 14;
-		} else if (points > 90 && points <= 100) {
-			xChange = Math.round(Math.random() * 10) + 15;
-			yChange = Math.round(Math.random() * 10) + 15;
-		} else if (points > 100) {
-			xChange = Math.round(Math.random() * 10) + 20;
-			yChange = Math.round(Math.random() * 10) + 20;
-		}
+			//Causes the target to move around the screen
+			//The larger the change, the faster the target moves
+			if (points <= 10) {
+				xChange = Math.round(Math.random() * 10);
+				yChange = Math.round(Math.random() * 10);
+			} else if (points > 10 && points <= 20) { 
+				xChange = Math.round(Math.random() * 10) + 5;
+				yChange = Math.round(Math.random() * 10) + 5;
+			} else if (points > 20 && points <= 30) { 
+				xChange = Math.round(Math.random() * 10) + 7;
+				yChange = Math.round(Math.random() * 10) + 7;
+			} else if (points > 30 && points <= 40) { 
+				xChange = Math.round(Math.random() * 10) + 9;
+				yChange = Math.round(Math.random() * 10) + 9;
+			} else if (points > 40 && points <= 50) {
+				xChange = Math.round(Math.random() * 10) + 10;
+				yChange = Math.round(Math.random() * 10) + 10;
+			} else if (points > 50 && points <= 60) { 
+				xChange = Math.round(Math.random() * 10) + 11;
+				yChange = Math.round(Math.random() * 10) + 11;
+			} else if (points > 60 && points <= 70) { 
+				xChange = Math.round(Math.random() * 10) + 12;
+				yChange = Math.round(Math.random() * 10) + 12;
+			} else if (points > 70 && points <= 80) {
+				xChange = Math.round(Math.random() * 10) + 13;
+				yChange = Math.round(Math.random() * 10) + 13;
+			} else if (points > 80 && points <= 90) {
+				xChange = Math.round(Math.random() * 10) + 14;
+				yChange = Math.round(Math.random() * 10) + 14;
+			} else if (points > 90 && points <= 100) {
+				xChange = Math.round(Math.random() * 10) + 15;
+				yChange = Math.round(Math.random() * 10) + 15;
+			} else if (points > 100) {
+				xChange = Math.round(Math.random() * 10) + 20;
+				yChange = Math.round(Math.random() * 10) + 20;
+			}
 		
-	} else { //Else if the player misses the target
-		hit_in_a_row = 0;
-		miss_in_a_row++;
-		hit_last_target = false;
+		} else { //Else if the player misses the target
+			hit_in_a_row = 0;
+			miss_in_a_row++;
+			hit_last_target = false;
+		} 
 	} 
 }
 
@@ -126,8 +130,8 @@ function Enemy() {
 	this.radius = Math.round(Math.random() * 30) + 20;
 }
 
+//Called repeatedly over and over as soon as game starts and continues
 function gameLogic() {
-	//Called repeatedly over and over as soon as game starts and continues
 	frame++;
 
 	if ((enemy.radius + radiusChange > minRadius) && (enemy.radius + radiusChange < maxRadius)) {
@@ -147,10 +151,6 @@ function gameLogic() {
 	} else {
 		yChange = -yChange;
 	}
-
-	// if (frame % 30 == 0) {
-	// 	enemy = new Enemy();
-	// }
 }
 
 function drawScreen() {
@@ -218,10 +218,14 @@ function drawScreen() {
 		if (lives > 0) {
 			lives = lives - 1;
 			miss_in_a_row = 0;
-		} else {
-			console.debug("AND GAME OVER!");
-			//------------- GAME OVER-----------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		}
+		} 
+	}
+	
+	//Create GAME OVER scenario 
+	if (lives == 0) {
+		playGame = false;
+		alert("GAME OVER!");
+		lives = -1;
 	}
 	
 	//Load our images for displaying lives
@@ -271,6 +275,12 @@ function drawLives(context, img1, img2, img3) {
 	context.drawImage(img2, 900, 450, 40, 40);
 	context.drawImage(img3, 940, 450, 40, 40);
 }
+
+function on() {
+
+}
+
+
 </script>
 
 <audio id="gunshot" src="./gunshot.mp3" preload="auto"></audio>
@@ -284,6 +294,9 @@ function drawLives(context, img1, img2, img3) {
 		<a href="index.html">Home</a>
 		<a href="howto.html">How To</a>
 		<a href="scores.html">High Scores</a>
+		<a href="index.html" id='resetBtn'>Reset</a>
+		<button onclick="on()">Music On</button>
+		<button onclick="off()">Music Off</button>
 	</nav>
 	<div id="rightC">
 		<canvas width="1000px" height="500px" id="myCanvas" onload="handleMouseMove(event);" onmousemove="handleMouseMove(event);" onmousedown="handleMouseClick();"></canvas><br>

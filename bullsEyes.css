@@ -14,6 +14,13 @@ nav a {
 nav a:hover {
 	background-color: #447799;
 }
+#resetBtn {
+	background-color: #B20000;
+	border: 3px solid black;
+	color: white;
+	padding: 10px 30px 10px 30px;
+	margin-left: 165px;
+}
 header {
 	background-image: url(thumbnail.png);
 	background-repeat: no-repeat;
@@ -39,7 +46,7 @@ canvas {
 	margin-top: 20px;
     display: block;
 }
-#mTextArea {   
+#myTextArea {   
 	margin: auto;
     display: block;
 	padding-top: 10px;
