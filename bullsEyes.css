@@ -61,6 +61,10 @@ footer {
 	background-position: left;
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px #555555;
+	-moz-transition:-moz-transform 1s;
+}
+footer:hover {
+	-moz-transform: scale(1.15, 1.15);
 }
 div.wave{
      position: relative;

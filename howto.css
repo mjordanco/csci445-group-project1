@@ -13,9 +13,6 @@ nav a {
 }
 nav a:hover {
 	background-color: #447799;
-	-o-transform: rotate(0.5turn);
-	-ms-transform: scale(1.2); /* IE 9 */
--webkit-transform: scale(1.2); /* Safari and Chrome */
 }
 h1 {
 	padding-left: 200px;
@@ -34,10 +31,12 @@ header {
 	border: 3px solid black;
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px #828282;
+	
 }
 nav {
 	padding-left: 150px;
 	margin-top: 30px;
+	-moz-transition:-moz-transform 1s;
 }
 footer {	
 	background-color: #333333;
@@ -51,7 +50,14 @@ footer {
 	background-position: left;
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px #555555;
+	-moz-transition:-moz-transform 1s;
+	-webkit-transition: -webkit-transform 1s;
 }
+footer:hover {
+	-moz-transform: scale(1.15, 1.15);
+	-webkit-transition: scale(1.15, 1.15);
+}
+
 div.wave{
      position: relative;
      width: 100%;}
@@ -110,4 +116,12 @@ dt {
 }
 .first:hover {
 	opacity:0.7;
+}
+dd {
+	-webkit-transition: background-color 1s linear;
+     -moz-transition: background-color 1s linear;
+     transition: background-color 1s linear;
+}
+dd:hover {
+	background-color: #BBBBBB;
 }
