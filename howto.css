@@ -99,8 +99,11 @@ div.wave > span:nth-child(10){
      to { height: 15px; }}
 #list{
 	background-color: #EDEDFE;
-	margin: auto;
+	margin: 20px 0px 0px 60px;;
 	width: 1050px;
+	padding: 20px 15px 20px 15px;
+	border: 3px solid black;
+	border-radius: 10px;
 }
 dt {
 	font-size: 20px;
