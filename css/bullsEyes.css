@@ -1,32 +1,9 @@
-body {
-	background-color: 	#326497;
-}
-nav a {  
-	background-color: #779977;
-	border: 1px solid black;
-	border-radius: 5px;
-	font-weight: bold;
-	color: #333399;
-	margin: 10px 1px;
-	padding: 10px 40px 10px 40px;
-	text-decoration: none;
-}
-nav a:hover {
-	background-color: #447799;
-}
-#resetBtn {
-	background-color: #B20000;
-	border: 3px solid black;
-	color: white;
-	padding: 10px 30px 10px 30px;
-	margin-left: 165px;
-}
 h1 {
 	padding-left: 200px;
 	width: 900px;
 }
 header {
-	background-image: url(thumbnail.png);
+	background-image: url(../images/thumbnail.png);
 	background-repeat: no-repeat;
 	background-position: right;
 	background-color: #999999;
@@ -39,10 +16,47 @@ header {
 	border-radius: 15px;
 	box-shadow: 5px 5px 5px #828282;
 }
-nav {
-	padding-left: 150px;
-	margin-top: 30px;
+body {
+	background-color: 	#326497;
 }
+nav a {  
+	background-color: #779977;
+	border: 3px solid black;
+	border-radius: 5px;
+	font-weight: bold;
+	text-shadow: 2px 2px white;
+	color: #333399;
+	margin: 10px 1px;
+	padding: 10px 40px 10px 40px;
+	text-decoration: none;
+}
+nav a:hover {
+	background-color: #447799;
+}
+nav {
+	padding-left: 130px;
+	margin-top: 30px;
+	margin-left: 15px;
+}
+#resetBtn {
+	background-color: #B20000;
+	border: 3px solid black;
+	color: white;
+	text-shadow: 2px 2px black;
+	padding: 10px 30px 10px 30px;
+	margin-left: 110px;
+	margin-right: 110px;
+}
+button {	
+	background-color: #0047B2;
+	text-shadow: 2px 2px black;
+	font-family: "Times New Roman", Georgia, serif;
+	font-size: medium;
+	color: white;
+	border: 3px solid black;
+	border-radius: 5px;
+	padding: 10px 20px 10px 20px;
+}	
 canvas {
 	cursor: none;
 	margin: auto;
@@ -56,14 +70,18 @@ canvas {
 	border-radius: 15px;
 	text-align: center;
 }
+p {
+	margin-left: 20px;
+	line-height: 25px;
+}
 footer {	
-	background-color: #333333;
+	background-color: #5C5C5C;
 	padding-left: 100px;
 	margin-left: 125px;
 	margin-top: 50px;
 	height: 25px;
 	width: 550px;
-	background-image: url(thumbnail.png);
+	background-image: url(../images/thumbnail.png);
 	background-repeat: no-repeat;
 	background-position: left;
 	border-radius: 15px;
